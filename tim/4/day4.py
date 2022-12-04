@@ -12,7 +12,6 @@ def parseSection(line: str) -> tuple[tuple[int, int], tuple[int, int]]:
     return sec1, sec2
 
 data = [parseSection(elv) for elv in file]
-print(data)
 
 fully_contains = 0
 for sec1, sec2 in data:
