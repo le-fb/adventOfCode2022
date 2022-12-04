@@ -16,7 +16,7 @@ def getPriority(singleChar):
 
 rucksackGroup = []
 with open("input3", "r") as input:
-    totalPrio = 0
+    totalPriority = 0
     for rucksack in input:        
         if rucksack[-1:] == "\n":
             rucksack = rucksack[:-1] 
@@ -27,19 +27,19 @@ with open("input3", "r") as input:
 
         commonLetter = ""
         for letter in rucksackGroup[0]:
-            Mismatch = True
+            mismatch = True
             for compareSack in rucksackGroup[1:]:
                 if not letter in compareSack:
-                    Mismatch = True
+                    mismatch = True
                     break
-                Mismatch = False
-            if Mismatch:
+                mismatch = False
+            if mismatch:
                 continue
             commonLetter = letter
 
         if commonLetter == "":
             raise Exception("Dude there is nothing in both compartments, I checked!")
-        totalPrio += getPriority(commonLetter)
+        totalPriority += getPriority(commonLetter)
         rucksackGroup = []
 
-    print(f"Total Priority: {totalPrio}")
+    print(f"Total Priority: {totalPriority}")
