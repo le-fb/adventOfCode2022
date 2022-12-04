@@ -29,7 +29,7 @@ int main()
         }
         else
         {
-            int half = bufferIndex / 2;
+            int half = bufferIndex >> 1;
             int done = 0;
             assert((bufferIndex) % 2 == 0);
             for (int i = 0; i < half; i++)
