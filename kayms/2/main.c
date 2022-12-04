@@ -21,7 +21,6 @@ int main()
     {
         if (ch != '\n')
         {
-            int test = 0;
         }
         else
         {
