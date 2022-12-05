@@ -8,12 +8,6 @@
 
 #define INPUT_FILE_NAME "../../kayms/4/input"
 
-typedef struct elfSpace
-{
-    int start;
-    int end;
-} elfSpace;
-
 void getElfSpace(char *input, int *spaces)
 {
     int numberIndex = 0;
@@ -91,7 +85,7 @@ int main()
 
     for (int i = 0; i < lines; i++)
     {
-        printf("%s\n", content[i]);
+        // printf("%s\n", content[i]);
         getElfSpace(content[i], space);
         sumFull += fullOverlap(space);
         sumPartial += partialOverlap(space);
