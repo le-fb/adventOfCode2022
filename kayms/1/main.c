@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define INPUT_FILE_NAME "../../1/input"
+#define INPUT_FILE_NAME "../../kayms/1/input"
 #define MAX_COUNT_ELF 1000
 #define LINE_BUFFER_SIZE 100
 
@@ -51,6 +51,15 @@ int main()
                     topCals[2] = topCals[1];
                     topCals[1] = topCals[0];
                     topCals[0] = elfCurrentCal;
+                }
+                else if (elfCurrentCal > topCals[1])
+                {
+                    topCals[2] = topCals[1];
+                    topCals[1] = elfCurrentCal;
+                }
+                else if (elfCurrentCal > topCals[2])
+                {
+                    topCals[2] = elfCurrentCal;
                 }
 
                 elfCurrentCal = 0;
