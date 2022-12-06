@@ -23,13 +23,9 @@ with open("adventOfCode1.input", mode = 'r') as input:
         if elfCalories > top3:
             top3 = elfCalories
         if top3 > top2:
-            buffer = top2
-            top2 = top3
-            top3 = buffer
+            top3, top2 = top2, top3
         if top2 > top1:
-            buffer = top1
-            top1 = top2
-            top2 = buffer
+            top2, top1 = top1, top2
         
     print(f"The top 3 calorie counts are: {top1}, {top2} and {top3} for a total of {top1 + top2 + top3} calories")
         
