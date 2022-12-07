@@ -61,7 +61,7 @@ def getGameScore(inputOpp, inputPlayer):
 
     return getOutcomeScore(oppSign, playerSign) + getSignScore(playerSign)
 
-with open("input2", "r") as input:
+with open("input2.txt", "r") as input:
     totalPoints = 0
     for line in input:
         totalPoints += getGameScore(line[0], line[2])

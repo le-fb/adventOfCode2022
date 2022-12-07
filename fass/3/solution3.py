@@ -14,7 +14,7 @@ def getPriority(singleChar):
         return lowerCaseValue + alphabetOffset
     return lowerCaseValue
 
-with open("input3", "r") as input:
+with open("input3.txt", "r") as input:
     totalPrio = 0
     for rucksack in input:
         if rucksack[-1:] == "\n":
