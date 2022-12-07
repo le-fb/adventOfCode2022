@@ -40,7 +40,7 @@ int readFile(char *filename, char ***content, int *lines)
 
     *lines = tempLines;
 
-    // makes points
+    // build lines
     int lastIndex = 0;
     int lineIndex = 0;
     (*content) = malloc(tempLines * sizeof(void *));
