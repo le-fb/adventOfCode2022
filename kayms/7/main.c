@@ -10,6 +10,8 @@
 #define MAX_SUBFOLDERS 1000
 #define MAX_FILES_PER_FOLDER 1000
 
+#define DISK_SIZE 70000000
+
 typedef struct folder folder;
 typedef struct file file;
 
@@ -101,24 +103,39 @@ int makeSizes(folder *currFolder)
     return sum;
 }
 
-int getLowSizeDirsSum(folder *currFolder)
+int getLowSizeDirsSum(folder *currFolder, int *folderCount)
 {
     int sum = 0;
 
     for (int i = 0; i < currFolder->folderIndex; i++)
     {
-        int temp = getLowSizeDirsSum(currFolder->subFolders[i]);
-        if (temp < 100000)
+
+        if (currFolder->subFolders[i]->folderSize <= 100000)
         {
-            sum += temp;
+            (*folderCount)++;
+            sum += currFolder->subFolders[i]->folderSize;
         }
+        sum += getLowSizeDirsSum(currFolder->subFolders[i], folderCount);
     }
-    int temp = sum + currFolder->folderSize;
-    if (temp < 100000)
-    {
-        return temp;
-    }
+
     return sum;
+}
+
+void searchDir(int size, folder **candidate, folder *currFolder)
+{
+    if (*candidate == NULL)
+    {
+        *candidate = currFolder;
+    }
+    if ((currFolder->folderSize - size) > 0 && (currFolder->folderSize - size) < ((*candidate)->folderSize - size))
+    {
+        *candidate = currFolder;
+    }
+
+    for (int i = 0; i < currFolder->folderIndex; i++)
+    {
+        searchDir(size, candidate, currFolder->subFolders[i]);
+    }
 }
 
 void printFileStruct(folder *currFolder, int currentLevel);
@@ -174,7 +191,10 @@ int main()
         int currIndex = 0;
         char *currLine = strdup(content[i]);
         char *split = strtok(currLine, " ");
-        assert(split != NULL);
+        if (split == NULL)
+        {
+            continue;
+        }
 
         if (strcmp(split, "$") == 0)
         {
@@ -268,6 +288,15 @@ int main()
 
     makeSizes(rootFolder);
     printFileStruct(rootFolder, 0);
-    printf("%i\n", getLowSizeDirsSum(rootFolder));
+    int test = 0;
+    printf("solution part 1: %i\n", getLowSizeDirsSum(rootFolder, &test));
+
+    folder *candidate = NULL;
+
+    int searchGoal = 30000000 - (DISK_SIZE - rootFolder->folderSize);
+    printf("search goal : %i\n", searchGoal);
+    searchDir(searchGoal, &candidate, rootFolder);
+    printf("solution part 2: %i\n", candidate->folderSize);
+
     return 0;
 }
