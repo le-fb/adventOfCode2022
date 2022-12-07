@@ -23,7 +23,7 @@ class IntRange:
             return False
         return True # Neither higher or lower -> Overlap
 
-with open("input4", "r") as input:
+with open("input4.txt", "r") as input:
     numContainments = 0
     numOverlaps = 0
     for pair in input:
