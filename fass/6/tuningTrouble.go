@@ -6,13 +6,6 @@ import (
 	"strconv"
 )
 
-func max(a int, b int) int {
-	if a >= b {
-		return a
-	}
-	return b
-}
-
 func main() {
 	args := os.Args[1:]
 	input := args[0]
