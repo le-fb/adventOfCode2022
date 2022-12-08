@@ -66,5 +66,15 @@ int readFile(char *filename, char ***content, int *lines)
     strcpy((*content)[lineIndex], tchar);
 
     fclose(file);
-    return 1;
+    return size;
+}
+
+int cToI(char c)
+{
+    int temp = (int)c;
+    if (temp > 47 && temp < 58)
+    {
+        return temp - '0';
+    }
+    return -1;
 }
