@@ -51,49 +51,62 @@ class Tree:
         return str(self.height)
 
 class Forrest:
-    def __init__(self) -> None:
-        self.forrest_grid: list[list[Tree]] = []
-
-    def __getitem__(self, keys) -> Tree:
-        x,y = keys
-        return self.forrest_grid[y][x]
-
-    def add_row(self, row:list[Tree]):
-        self.forrest_grid.append(row)
+    def __init__(self, root: Tree=None) -> None:
+        self.root: Tree = None
 
     def seen_from_outside_count(self) -> int:
         count = 0
-        for row in self.forrest_grid:
-            for tree in row:
-                count += tree.seen_from_outside()
+        first = self.root
+        current = self.root
+        while current is not None:
+            count += current.seen_from_outside()
+            current = current["right"]
+            if current is None:
+                current = first["down"]
+                first = first["down"]
         return count
 
     def highest_scenic_score(self) -> int:
         highest = 0
-        for row in self.forrest_grid:
-            for tree in row:
-                score = tree.scenic_score()
-                if score > highest:
-                    highest = score
+        first = self.root
+        current = self.root
+        while current is not None:
+            score = current.scenic_score()
+            if score > highest:
+                highest = score
+            current = current["right"]
+            if current is None:
+                current = first["down"]
+                first = first["down"]
         return highest
 
 with open("tim/8/input.txt", "r") as f:
     file = f.read().splitlines()
 
 forrest = Forrest()
+latest_row = None
 for row_ind, row in enumerate(file):
-    forrest_row = []
-    latest = None
+    current_row = []
     for col_ind, col in enumerate(row):
-        new_tree = Tree(int(col), latest)
-        forrest_row.append(new_tree)
-        if latest is not None:
-            latest["right"] = new_tree
-        if row_ind-1 >= 0:
-            new_tree["up"] = forrest[col_ind, row_ind-1]
-            forrest[col_ind, row_ind-1]["down"] = new_tree
-        latest = new_tree
-    forrest.add_row(forrest_row)
+        new_tree = Tree(int(col))
+        current_row.append(new_tree)
+        if len(current_row)>1:
+            new_tree["left"] = current_row[col_ind-1]
+            current_row[col_ind-1]["right"] = new_tree
+
+        if latest_row is not None:
+            new_tree["up"] = latest_row[col_ind]
+            latest_row[col_ind]["down"] = new_tree
+    latest_row = current_row
+
+# get upper left tree as root
+while new_tree["up"] is not None:
+    while new_tree["left"] is not None:
+        new_tree = new_tree["left"]
+    new_tree = new_tree["up"]
+upper_left = new_tree
+
+forrest.root = upper_left
 
 print(f"There are {forrest.seen_from_outside_count()} visible Trees")
 print(f"The highest scenic score possible is {forrest.highest_scenic_score()}")
