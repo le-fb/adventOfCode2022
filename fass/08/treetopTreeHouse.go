@@ -58,11 +58,11 @@ func main() {
 	for colIndex := 0; colIndex < len(grid); colIndex++ {
 		curMax := -1
 		curMaxIndex := -1
-		col := &grid[colIndex]
+		col := grid[colIndex]
 
-		for rowIndex := 0; rowIndex < len(*col); rowIndex++ {
-			tree := &(*col)[rowIndex]
-			if (*tree).height > curMax {
+		for rowIndex := 0; rowIndex < len(col); rowIndex++ {
+			tree := &col[rowIndex]
+			if tree.height > curMax {
 				tree.visible = true
 				curMax = tree.height
 				curMaxIndex = rowIndex
@@ -70,8 +70,8 @@ func main() {
 		}
 		curMax = -1
 		// Tree at curMaxIndex is heighest when viewed from other direction -> only search up to that point (not including)
-		for rowIndex := len(*col) - 1; rowIndex > curMaxIndex; rowIndex-- {
-			tree := &(*col)[rowIndex]
+		for rowIndex := len(col) - 1; rowIndex > curMaxIndex; rowIndex-- {
+			tree := &col[rowIndex]
 			if tree.height > curMax {
 				tree.visible = true
 				curMax = tree.height
@@ -84,7 +84,7 @@ func main() {
 		curMaxIndex := -1
 		for colIndex := 0; colIndex < len(grid); colIndex++ {
 			tree := &grid[colIndex][rowIndex]
-			if (*tree).height > curMax {
+			if tree.height > curMax {
 				tree.visible = true
 				curMax = tree.height
 				curMaxIndex = colIndex
@@ -107,11 +107,11 @@ func main() {
 	for colIndex, col := range grid {
 		for rowIndex := 0; rowIndex < len(col); rowIndex++ {
 			tree := &col[rowIndex]
-			if (*tree).visible {
+			if tree.visible {
 				numVisible++
 			}
 			if colIndex == 0 || rowIndex == 0 {
-				(*tree).viewingScore = 0
+				tree.viewingScore = 0
 				continue
 			}
 			curCoordinate := coordinate{row: rowIndex, col: colIndex - 1}
@@ -147,7 +147,7 @@ func main() {
 			}
 			downScore := curCoordinate.row - rowIndex
 			viewingScore := upScore * downScore * leftScore * rightScore
-			(*tree).viewingScore = viewingScore
+			tree.viewingScore = viewingScore
 			if viewingScore > maxScenic {
 				maxScenic = viewingScore
 			}
