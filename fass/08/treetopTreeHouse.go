@@ -116,7 +116,7 @@ func main() {
 			}
 			curCoordinate := coordinate{row: rowIndex, col: colIndex - 1}
 			for curCoordinate.col > 0 {
-				if grid[curCoordinate.col][curCoordinate.row].height >= (*tree).height {
+				if grid[curCoordinate.col][curCoordinate.row].height >= tree.height {
 					break
 				}
 				curCoordinate.col--
@@ -124,7 +124,7 @@ func main() {
 			rightScore := colIndex - curCoordinate.col
 			curCoordinate = coordinate{row: rowIndex, col: colIndex + 1}
 			for curCoordinate.col < len(col)-1 {
-				if grid[curCoordinate.col][curCoordinate.row].height >= (*tree).height {
+				if grid[curCoordinate.col][curCoordinate.row].height >= tree.height {
 					break
 				}
 				curCoordinate.col++
@@ -132,7 +132,7 @@ func main() {
 			leftScore := curCoordinate.col - colIndex
 			curCoordinate = coordinate{row: rowIndex - 1, col: colIndex}
 			for curCoordinate.row > 0 {
-				if grid[curCoordinate.col][curCoordinate.row].height >= (*tree).height {
+				if grid[curCoordinate.col][curCoordinate.row].height >= tree.height {
 					break
 				}
 				curCoordinate.row--
@@ -140,7 +140,7 @@ func main() {
 			upScore := rowIndex - curCoordinate.row
 			curCoordinate = coordinate{row: rowIndex + 1, col: colIndex}
 			for curCoordinate.row < len(grid)-1 {
-				if grid[curCoordinate.col][curCoordinate.row].height >= (*tree).height {
+				if grid[curCoordinate.col][curCoordinate.row].height >= tree.height {
 					break
 				}
 				curCoordinate.row++
