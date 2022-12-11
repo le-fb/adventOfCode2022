@@ -82,7 +82,7 @@ def parse_content(current_dir: Directory, line:str):
         print(f"Something has gone terribly wrong here... '{line}'")
 
 
-with open("input.txt", "r") as f:
+with open("tim/07/input.txt", "r") as f:
     file = f.read().splitlines()
 
 # parse input file
