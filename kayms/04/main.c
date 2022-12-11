@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/4/input"
+#define INPUT_FILE_NAME "../../kayms/04/input"
 
 void getElfSpace(char *input, int *spaces)
 {

@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <assert.h>
 
-#define INPUT_FILE_NAME "../../kayms/3/input"
+#define INPUT_FILE_NAME "../../kayms/03/input"
 #define LINE_BUFFER_SIZE 1000
 
 int main()
