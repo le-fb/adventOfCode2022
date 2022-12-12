@@ -79,10 +79,12 @@ int cToI(char c)
     return -1;
 }
 
+/** linked list stuff  */
+
 linkedNode *createLinkedNode(void *obj)
 {
     linkedNode *t = malloc(sizeof(linkedNode));
-    t->end = t;
+    t->end = NULL;
     t->next = NULL;
     t->pre = NULL;
     t->obj = obj;
@@ -99,6 +101,20 @@ int getNodeSize(linkedNode *root)
         size++;
     }
     return size;
+}
+
+int linkedNodeContains(linkedNode *root, linkedNode *node)
+{
+    linkedNode *curr = root;
+    while (curr != NULL)
+    {
+        if (curr->obj == node->obj)
+        {
+            return 1;
+        }
+        curr = curr->next;
+    }
+    return 0;
 }
 
 linkedNode *removeNode(linkedNode *root, linkedNode *node)
@@ -206,7 +222,7 @@ void quickSort(linkedNode *low, linkedNode *high, nodeCmp cmp)
     }
 }
 
-linkedNode *sortNodes(linkedNode *root, nodeCmp cmp)
+void sortNodes(linkedNode *root, nodeCmp cmp)
 {
     quickSort(root, root->end, cmp);
 }
@@ -221,4 +237,82 @@ void *printNodes(linkedNode *root, printObj p)
         curr = curr->next;
     }
     printf("]\n");
+}
+
+/**grid stuff*/
+
+int gridDist(gridNode *a, gridNode *b)
+{
+    return (int)sqrt(pow(a->x - b->x, 2) + pow(a->y - b->y, 2));
+}
+
+/** A* stuff **/
+
+void printAStar(void *obj)
+{
+    aStarObj *a = (aStarObj *)obj;
+    printf("[%i,%i], ", a->pos->x, a->pos->y);
+}
+
+aStarObj *aStarSearch(aStarObj *root)
+{
+    assert(root->isStart == 1);
+
+    linkedNode *open = NULL;
+    linkedNode *closed = NULL;
+
+    open = pushBackNode(open, createLinkedNode(root));
+
+    linkedNode *curr = open;
+
+    while (!((aStarObj *)curr->obj)->isEnd)
+    {
+        linkedNode *currN = ((aStarObj *)curr->obj)->aStarNeighbour;
+
+        while (currN != NULL)
+        {
+            if (linkedNodeContains(closed, currN))
+            {
+                currN = currN->next;
+                continue;
+            }
+
+            int tempPathCost = ((aStarObj *)currN->obj)->pathCost + ((aStarObj *)curr->obj)->currPathCost;
+            int tempWeight = tempPathCost + ((aStarObj *)currN->obj)->distToGo;
+
+            if (tempWeight < ((aStarObj *)currN->obj)->currWeight || ((aStarObj *)currN->obj)->currWeight < 0)
+            {
+                ((aStarObj *)currN->obj)->currPathCost = tempPathCost;
+                ((aStarObj *)currN->obj)->currWeight = tempWeight;
+                ((aStarObj *)currN->obj)->prev = (aStarObj *)curr->obj;
+            }
+
+            if (!linkedNodeContains(open, currN))
+            {
+                // add to open list if it not exists
+                linkedNode *temp = currN->next;
+                open = pushBackNode(open, currN);
+                currN = temp;
+            }
+            else
+            {
+                currN = currN->next;
+            }
+        }
+        sortNodes(open, aStarObjCmp);
+
+        open = removeNode(open, curr);
+        closed = pushBackNode(closed, curr);
+        curr = open;
+        if (open == NULL)
+        {
+            return NULL;
+        }
+    }
+    return (aStarObj *)curr->obj;
+}
+
+int aStarObjCmp(void *obj0, void *obj1)
+{
+    return ((aStarObj *)obj0)->currWeight - ((aStarObj *)obj1)->currWeight;
 }
