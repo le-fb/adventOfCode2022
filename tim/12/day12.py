@@ -1,4 +1,6 @@
 from __future__ import annotations
+import os
+import time
 
 class Square:
     def __init__(self, x:int, y:int, height:int, left=None, right=None,up=None, down=None) -> None:
@@ -18,7 +20,7 @@ class Square:
         return self.distance < other.distance
 
     def __repr__(self) -> str:
-        return f"({self.x}, {self.y}), {self.height}({chr(self.height+97)})"
+        return f"{chr(self.height+97)}"
 
 def read_map():
     with open("tim/12/input.txt", "r") as f:
@@ -59,13 +61,20 @@ def read_map():
 
     return entry, start, end
 
-def print_map(square_head: Square, show_visited=False):
+def print_map(square_head: Square, start, end, visited=None, show_visited=False):
     first = square_head
     current = square_head
     while current is not None:
-        ch = chr(current.height+97)
+        ch = f"\u001b[1;37m{chr(current.height+97)}"
         if show_visited and current.latest is not None:
-            ch = "?"
+            ch = f"\u001b[1;33m{chr(current.height+97)}\u001b[1;37m"
+        if visited is not None:
+            if (current.x, current.y) in visited:
+                ch = f"\u001b[1;31m{chr(current.height+97)}\u001b[1;37m"
+        if (current.x, current.y) == start:
+            ch = "S"
+        if (current.x, current.y) == end:
+            ch = "E"
         print(ch, end="")
         current = current.right
         if current is None:
@@ -73,7 +82,7 @@ def print_map(square_head: Square, show_visited=False):
             first = first.down
             current = first
 
-def calculate_path(grid, start, end):
+def calculate_path(grid, start, end, print_grid=False):
     # move to start square coordinates
     start_square = grid
     for _ in range(start[0]):
@@ -120,13 +129,18 @@ def calculate_path(grid, start, end):
             del visible[m]
         current = next
         current.latest = next.latest_candidate
-        #print_map(entry, show_visited=True)
-
+        #print_map(entry, start, end, show_visited=True)
+        #time.sleep(0.05)
+        #os.system("cls")
     if not no_path_exist:
         steps = 0
+        visited = []
         while current != start_square:
+            visited.append((current.x, current.y))
             steps += 1
             current = current.latest
+        if print_grid:
+            print_map(entry, start, end, visited=visited, show_visited=False)
     else:
         steps = float("inf")
 
@@ -151,7 +165,8 @@ def find_shortest_path(square_head: Square, height=0):
     return lowest, l_square
 
 entry, start, end = read_map()
-print(f"There are {calculate_path(entry, start, end)} stepts from start S to destination E")
+print(f"There are {calculate_path(entry, start, end, print_grid=True)} stepts from start S to destination E")
+
 
 entry, start, end = read_map()
 lowest, lowest_square = find_shortest_path(entry, height=0)
