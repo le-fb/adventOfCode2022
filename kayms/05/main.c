@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/5/input"
+#define INPUT_FILE_NAME "../../kayms/05/input"
 
 typedef struct crate
 {

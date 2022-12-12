@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <assert.h>
 
-#define INPUT_FILE_NAME "../../kayms/2/input"
+#define INPUT_FILE_NAME "../../kayms/02/input"
 #define MAX_COUNT_ELF 1000
 #define LINE_BUFFER_SIZE 100
 

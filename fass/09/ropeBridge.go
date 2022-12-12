@@ -71,6 +71,21 @@ func main() {
 
 	tailCoords := make([]coordinate, 0)
 
+	// s, err := tcell.NewScreen()
+	// if err != nil {
+	// 	log.Fatalf("%+v", err)
+	// }
+	// if err := s.Init(); err != nil {
+	// 	log.Fatalf("%+v", err)
+	// }
+
+	// // Set default text style
+	// defStyle := tcell.StyleDefault.Background(tcell.ColorReset).Foreground(tcell.ColorReset)
+	// s.SetStyle(defStyle)
+
+	// // Clear screen
+	// s.Clear()
+
 	for scanner.Scan() {
 		if len(scanner.Text()) == 0 {
 			continue

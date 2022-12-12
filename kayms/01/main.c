@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define INPUT_FILE_NAME "../../kayms/1/input"
+#define INPUT_FILE_NAME "../../kayms/01/input"
 #define MAX_COUNT_ELF 1000
 #define LINE_BUFFER_SIZE 100
 

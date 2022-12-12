@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/7/input"
+#define INPUT_FILE_NAME "../../kayms/07/input"
 #define MAX_SUBFOLDERS 1000
 #define MAX_FILES_PER_FOLDER 1000
 

@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/6/input"
+#define INPUT_FILE_NAME "../../kayms/06/input"
 #define MARKER_SIZE 13
 
 int getStartOfPackage(char *input)

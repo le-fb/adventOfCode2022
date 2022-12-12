@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/9/input"
+#define INPUT_FILE_NAME "../../kayms/09/input"
 #define GRID_SIZE 900
 
 typedef struct point point;

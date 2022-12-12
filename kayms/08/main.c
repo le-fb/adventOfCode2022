@@ -6,7 +6,7 @@
 
 #include <utils.h>
 
-#define INPUT_FILE_NAME "../../kayms/8/input"
+#define INPUT_FILE_NAME "../../kayms/08/input"
 
 typedef enum direction direction;
 
