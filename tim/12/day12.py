@@ -164,10 +164,13 @@ def find_shortest_path(square_head: Square, height=0):
             current = first
     return lowest, l_square
 
+st = time.process_time()
 entry, start, end = read_map()
 print(f"There are {calculate_path(entry, start, end, print_grid=True)} stepts from start S to destination E")
-
 
 entry, start, end = read_map()
 lowest, lowest_square = find_shortest_path(entry, height=0)
 print(f"The shortest Path from a elevation level 'a' sqaure is {lowest}, the square coordinates are ({lowest_square.x}|{lowest_square.y})")
+
+et = time.process_time()
+print(f"{et-st} seconds")
