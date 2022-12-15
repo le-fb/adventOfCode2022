@@ -28,6 +28,7 @@ typedef void (*printObj)(void *obj);            // for printing to obj in the no
 struct linkedNode
 {
     void *obj;
+    int type;
     // int currSize;    // only for root node
     linkedNode *end; // only for root node
     linkedNode *pre;
