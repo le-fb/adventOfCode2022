@@ -13,11 +13,6 @@ type coordinate struct {
 	x, y int
 }
 
-type nullableInt struct {
-	hasValue bool
-	value    int
-}
-
 type sensor struct {
 	location *coordinate
 	radius   int
