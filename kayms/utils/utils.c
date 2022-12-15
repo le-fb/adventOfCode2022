@@ -246,6 +246,27 @@ int gridDist(gridNode *a, gridNode *b)
     return (int)sqrt(pow(a->x - b->x, 2) + pow(a->y - b->y, 2));
 }
 
+void showGrid(gridNode *grid, printGridObj print)
+{
+    gridNode *curr = grid;
+    gridNode *next = NULL;
+    gridNode *lineStart = grid;
+    gridDirection dir = E;
+    while (curr != NULL)
+    {
+        print(curr->obj);
+        next = curr->neighbor[E];
+
+        if (next == NULL)
+        {
+            next = lineStart->neighbor[S];
+            lineStart = next;
+            printf("\n");
+        }
+        curr = next;
+    }
+}
+
 /** A* stuff **/
 
 void printAStar(void *obj)

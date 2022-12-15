@@ -27,7 +27,7 @@ struct linkedList
     int isRoot;
     int size;
 
-    entry *obj;
+    void *obj;
     int type;
 
     linkedList *end;

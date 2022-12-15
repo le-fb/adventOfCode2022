@@ -143,7 +143,7 @@ linkedList *partitionList(linkedList *low, linkedList *high, listEntryCmp cmp)
 
     while (j != high)
     {
-        if (cmp(j->obj->arr, pivot->obj->arr) < 0)
+        if (cmp(((entry *)(j->obj))->arr, ((entry *)pivot->obj)->arr) < 0)
         {
             i = i->next;
 

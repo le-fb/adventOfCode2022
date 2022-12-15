@@ -85,10 +85,20 @@ void *printNodes(linkedNode *root, printObj p);
  */
 
 typedef struct gridNode gridNode;
+typedef void (*printGridObj)(void *obj);
 
-/**
- * neighbor 0 => north, 1=> east, 2=>south, 3=>west
- */
+typedef enum gridDirection gridDirection;
+enum gridDirection
+{
+    N = 0,
+    NE = 1,
+    E,
+    SE,
+    S,
+    SW,
+    W,
+    NW
+};
 
 struct gridNode
 {
@@ -99,6 +109,8 @@ struct gridNode
 };
 
 int gridDist(gridNode *a, gridNode *b);
+
+void showGrid(gridNode *grid, printGridObj print);
 
 /**
  * A* stuff
