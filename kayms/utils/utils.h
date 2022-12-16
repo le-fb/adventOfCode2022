@@ -8,7 +8,7 @@
 
 /**
  * reads a file
- * returns 1 for success
+ * returns size of file and -1 for an error
  */
 
 int readFile(char *filename, char ***content, int *lines);
