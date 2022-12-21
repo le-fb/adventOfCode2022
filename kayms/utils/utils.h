@@ -144,4 +144,10 @@ int aStarObjCmp(void *obj0, void *obj1);
 
 aStarObj *aStarSearch(aStarObj *root);
 
+#define BITS_PER_CHAR (8)     /* not true on all machines! */
+#define MAX_STRING_SIZE (128) /* we'll stop hashing after this many */
+#define MAX_BITS (BITS_PER_CHAR * MAX_STRING_SIZE)
+
+unsigned long hash(const char *s);
+
 #endif

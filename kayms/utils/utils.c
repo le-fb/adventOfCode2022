@@ -337,3 +337,24 @@ int aStarObjCmp(void *obj0, void *obj1)
 {
     return ((aStarObj *)obj0)->currWeight - ((aStarObj *)obj1)->currWeight;
 }
+
+#define MULTIPLIER (37)
+
+unsigned long hash(const char *s)
+{
+    unsigned long h;
+    unsigned const char *us;
+
+    /* cast s to unsigned const char * */
+    /* this ensures that elements of s will be treated as having values >= 0 */
+    us = (unsigned const char *)s;
+
+    h = 0;
+    while (*us != '\0')
+    {
+        h = h * MULTIPLIER + *us;
+        us++;
+    }
+
+    return h;
+}
