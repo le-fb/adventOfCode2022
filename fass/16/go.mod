@@ -1,4 +1,4 @@
-module hillClimbing
+module volcano
 
 go 1.19
 

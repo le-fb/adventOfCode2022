@@ -1,4 +1,4 @@
-module hillClimbing
+module boilingBoulders
 
 go 1.19
 

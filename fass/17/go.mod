@@ -1,4 +1,4 @@
-module hillClimbing
+module pyroclasticFlow
 
 go 1.19
 

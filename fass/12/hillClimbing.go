@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"hillClimbing/dijkstra"
+	"fass/tools/dijkstra"
 	"log"
 	"os"
 	"strings"
